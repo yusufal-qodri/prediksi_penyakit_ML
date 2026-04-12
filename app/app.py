@@ -11,7 +11,7 @@ from datetime import datetime
 # ── Config ───────────────────────────────────────────────────
 st.set_page_config(
     page_title="DeteksiPenyakit.id",
-    page_icon="🏥",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -256,24 +256,24 @@ if 'history' not in st.session_state:
 with st.sidebar:
     st.markdown("""
     <div style='text-align:center; padding: 20px 0 28px 0;'>
-        <div style='font-size:3rem;'>🏥</div>
+        <div style='font-size:3rem;'></div>
         <div style='font-family: Instrument Serif, serif; font-size:1.4rem; color:white; margin-top:8px;'>DeteksiPenyakit</div>
         <div style='font-size:0.78rem; opacity:0.6; margin-top:4px; color:white;'>Sistem Diagnosa Berbasis AI</div>
     </div>
     """, unsafe_allow_html=True)
 
     page = st.radio("", [
-        "🔍  Prediksi Penyakit",
-        "📚  Ensiklopedi Penyakit",
-        "📜  Riwayat Pemeriksaan",
-        "📊  Visualisasi Data",
-        "ℹ️  Tentang Aplikasi"
+        "  Prediksi Penyakit",
+        "  Ensiklopedi Penyakit",
+        "  Riwayat Pemeriksaan",
+        "  Visualisasi Data",
+        "  Tentang Aplikasi"
     ])
 
     st.markdown(f"""
     <div style='margin-top:20px; padding:12px 14px; background:rgba(255,255,255,0.07); 
                 border-radius:10px; font-size:0.8rem; color:rgba(255,255,255,0.7);'>
-        📋 Riwayat: <b style='color:white;'>{len(st.session_state.history)} pemeriksaan</b>
+        Riwayat: <b style='color:white;'>{len(st.session_state.history)} pemeriksaan</b>
     </div>
     """, unsafe_allow_html=True)
 
@@ -283,7 +283,7 @@ with st.sidebar:
 if "Prediksi" in page:
     st.markdown("""
     <div class='hero'>
-        <h1>🔍 Deteksi Penyakit dari Gejala</h1>
+        <h1> Deteksi Penyakit dari Gejala</h1>
         <p>Pilih gejala yang kamu rasakan, sistem AI akan menganalisis dan memberikan prediksi penyakit beserta rekomendasi lengkap.</p>
     </div>
     """, unsafe_allow_html=True)
@@ -296,10 +296,10 @@ if "Prediksi" in page:
 
     col_btn, col_info = st.columns([1, 3])
     with col_btn:
-        predict_btn = st.button("🔍 Analisis Sekarang", use_container_width=True)
+        predict_btn = st.button("Analisis Sekarang", use_container_width=True)
     with col_info:
         if selected_indo:
-            st.markdown(f"<div style='padding:12px; color:#475569; font-size:0.9rem;'>✅ {len(selected_indo)} gejala dipilih</div>", unsafe_allow_html=True)
+            st.markdown(f"<div style='padding:12px; color:#475569; font-size:0.9rem;'> {len(selected_indo)} gejala dipilih</div>", unsafe_allow_html=True)
         else:
             st.markdown("<div style='padding:12px; color:#94a3b8; font-size:0.9rem;'>ℹ️ Pilih minimal 2 gejala untuk memulai analisis</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
@@ -326,11 +326,11 @@ if "Prediksi" in page:
             })
 
             # ── Hasil prediksi ──
-            st.markdown("<div class='section-title' style='margin-top:8px;'>🎯 Hasil Prediksi</div>", unsafe_allow_html=True)
+            st.markdown("<div class='section-title' style='margin-top:8px;'> Hasil Prediksi</div>", unsafe_allow_html=True)
             c1, c2, c3 = st.columns(3)
             for col, cls, medal, name, pct in zip(
                 [c1,c2,c3], ["gold","silver","bronze"],
-                ["🥇","🥈","🥉"], top3_names, top3_proba
+                ["Kemungkinan Besar","Kemungkinan Sedang","Kemungkinan Kecil"], top3_names, top3_proba
             ):
                 with col:
                     st.markdown(f"""
@@ -345,7 +345,7 @@ if "Prediksi" in page:
 
             # ── Tingkat keparahan ──
             sev_label, sev_pct, sev_color, sev_icon = calc_severity(selected_en)
-            st.markdown("<div class='section-title'>🌡️ Tingkat Keparahan Gejala</div>", unsafe_allow_html=True)
+            st.markdown("<div class='section-title'> Tingkat Keparahan Gejala</div>", unsafe_allow_html=True)
             col_sev1, col_sev2 = st.columns([2,1])
             with col_sev1:
                 st.markdown(f"""
@@ -375,11 +375,11 @@ if "Prediksi" in page:
             # ── Dokter & Deskripsi ──
             col_left, col_right = st.columns(2)
             with col_left:
-                st.markdown(f"<div class='section-title'>📋 Tentang {best_id}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='section-title'> Tentang {best_id}</div>", unsafe_allow_html=True)
                 if best_en in df_desc.index:
                     st.markdown(f"<div class='info-box'>{df_desc.loc[best_en, 'Description']}</div>", unsafe_allow_html=True)
 
-                st.markdown("<div class='section-title' style='margin-top:16px;'>👨‍⚕️ Dokter yang Tepat</div>", unsafe_allow_html=True)
+                st.markdown("<div class='section-title' style='margin-top:16px;'> Dokter yang Tepat</div>", unsafe_allow_html=True)
                 dokter = doctor_map.get(best_en, "Dokter Umum")
                 st.markdown(f"""
                 <div class='doctor-box'>
@@ -394,7 +394,7 @@ if "Prediksi" in page:
                 st.markdown("<div class='section-title'>⚠️ Tindakan Pertama</div>", unsafe_allow_html=True)
                 if best_en in df_prec.index:
                     row = df_prec.loc[best_en]
-                    icons = ["💊","🏃","🥗","🏥"]
+                    icons = ["✦","✦","✦","✦"]
                     for i in range(1, 5):
                         val = row.get(f'Precaution_{i}', '')
                         if pd.notna(val) and val:
@@ -416,7 +416,7 @@ if "Prediksi" in page:
             st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
             # ── SHAP ──
-            st.markdown("<div class='section-title'>🧠 Analisis Pengaruh Gejala (SHAP)</div>", unsafe_allow_html=True)
+            st.markdown("<div class='section-title'> Analisis Pengaruh Gejala (SHAP)</div>", unsafe_allow_html=True)
             st.markdown("<div style='font-size:0.85rem;color:#64748b;margin-bottom:16px;'>Seberapa besar kontribusi setiap gejala terhadap hasil prediksi.</div>", unsafe_allow_html=True)
 
             shap_vals     = explainer.shap_values(input_vec)
@@ -458,7 +458,7 @@ if "Prediksi" in page:
 elif "Ensiklopedi" in page:
     st.markdown("""
     <div class='hero'>
-        <h1>📚 Ensiklopedi Penyakit</h1>
+        <h1>Ensiklopedi Penyakit</h1>
         <p>Pelajari informasi lengkap tentang semua penyakit yang dapat dideteksi oleh sistem ini.</p>
     </div>
     """, unsafe_allow_html=True)
@@ -479,7 +479,7 @@ elif "Ensiklopedi" in page:
             col1, col2 = st.columns(2)
             with col1:
                 if en in df_desc.index:
-                    st.markdown(f"**📋 Deskripsi**")
+                    st.markdown(f"** Deskripsi**")
                     st.markdown(f"<div class='info-box'>{df_desc.loc[en, 'Description']}</div>", unsafe_allow_html=True)
                 dokter = doctor_map.get(en, "Dokter Umum")
                 st.markdown(f"""
@@ -494,14 +494,14 @@ elif "Ensiklopedi" in page:
                 if en in df_prec.index:
                     st.markdown("**⚠️ Tindakan Pertama**")
                     row = df_prec.loc[en]
-                    icons = ["💊","🏃","🥗","🏥"]
+                    icons = ["✦","✦","✦","✦"]
                     for i in range(1,5):
                         val = row.get(f'Precaution_{i}','')
                         if pd.notna(val) and val:
                             st.markdown(f"<div class='precaution-item'><span>{icons[i-1]}</span><span>{val.strip().capitalize()}</span></div>", unsafe_allow_html=True)
                 tips = prevention_map.get(en, [])
                 if tips:
-                    st.markdown("**🛡️ Cara Pencegahan**")
+                    st.markdown("**🛡️ Cara Mencegah**")
                     for tip in tips:
                         st.markdown(f"<div class='prevention-item'><span>✦</span><span>{tip}</span></div>", unsafe_allow_html=True)
 
@@ -511,7 +511,7 @@ elif "Ensiklopedi" in page:
 elif "Riwayat" in page:
     st.markdown("""
     <div class='hero'>
-        <h1>📜 Riwayat Pemeriksaan</h1>
+        <h1> Riwayat Pemeriksaan</h1>
         <p>Lihat semua hasil analisis yang telah kamu lakukan selama sesi ini.</p>
     </div>
     """, unsafe_allow_html=True)
@@ -519,7 +519,7 @@ elif "Riwayat" in page:
     if not st.session_state.history:
         st.markdown("""
         <div class='card' style='text-align:center; padding:48px;'>
-            <div style='font-size:3rem; margin-bottom:12px;'>📋</div>
+            <div style='font-size:3rem; margin-bottom:12px;'></div>
             <div style='font-weight:600; color:#1e293b; margin-bottom:8px;'>Belum ada riwayat pemeriksaan</div>
             <div style='color:#64748b; font-size:0.9rem;'>Lakukan prediksi terlebih dahulu di halaman Prediksi Penyakit</div>
         </div>""", unsafe_allow_html=True)
@@ -528,7 +528,7 @@ elif "Riwayat" in page:
         with col_info:
             st.markdown(f"<div style='color:#64748b; font-size:0.9rem; padding:8px 0;'>Total {len(st.session_state.history)} pemeriksaan dalam sesi ini</div>", unsafe_allow_html=True)
         with col_clear:
-            if st.button("🗑️ Hapus Semua"):
+            if st.button("Hapus Semua"):
                 st.session_state.history = []
                 st.rerun()
 
@@ -540,7 +540,7 @@ elif "Riwayat" in page:
                         {item['penyakit']} <span class='tag'>{item['persen']}</span>
                     </div>
                     <div style='font-size:0.82rem; color:#64748b;'>
-                        🕐 {item['waktu']} &nbsp;·&nbsp; 🩺 {len(item['gejala'])} gejala dipilih
+                         {item['waktu']} &nbsp;·&nbsp; 🩺 {len(item['gejala'])} gejala dipilih
                     </div>
                     <div style='font-size:0.82rem; color:#94a3b8; margin-top:4px;'>
                         {', '.join(item['gejala'][:4])}{'...' if len(item['gejala']) > 4 else ''}
@@ -555,7 +555,7 @@ elif "Riwayat" in page:
 elif "Visualisasi" in page:
     st.markdown("""
     <div class='hero'>
-        <h1>📊 Visualisasi Dataset</h1>
+        <h1>Visualisasi Dataset</h1>
         <p>Eksplorasi data penyakit dan gejala yang digunakan untuk melatih model prediksi.</p>
     </div>
     """, unsafe_allow_html=True)
@@ -563,10 +563,10 @@ elif "Visualisasi" in page:
     symptom_cols = [c for c in df_encoded.columns if c != 'Disease']
     c1, c2, c3, c4 = st.columns(4)
     for col, num, label, icon in [
-        (c1, str(df_encoded['Disease'].nunique()), "Total Penyakit", "🦠"),
-        (c2, str(len(symptom_cols)), "Total Gejala", "🩺"),
-        (c3, str(len(df_encoded)), "Total Data", "📁"),
-        (c4, "100%", "Akurasi Model", "🎯"),
+        (c1, str(df_encoded['Disease'].nunique()), "Total Penyakit"),
+        (c2, str(len(symptom_cols)), "Total Gejala"),
+        (c3, str(len(df_encoded)), "Total Data"),
+        (c4, "100%", "Akurasi Model"),
     ]:
         with col:
             st.markdown(f"""
@@ -579,7 +579,7 @@ elif "Visualisasi" in page:
     st.markdown("<div style='margin-top:24px;'></div>", unsafe_allow_html=True)
 
     st.markdown("<div class='card'>", unsafe_allow_html=True)
-    st.markdown("<div class='section-title'>🦠 Distribusi Data per Penyakit</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'> Distribusi Data per Penyakit</div>", unsafe_allow_html=True)
     disease_counts = df_encoded['Disease'].value_counts().reset_index()
     disease_counts.columns = ['Disease', 'Jumlah']
     disease_counts['Penyakit'] = disease_counts['Disease'].apply(translate_disease)
@@ -670,27 +670,27 @@ elif "Tentang" in page:
         <div class='section-title'>🗺️ Fitur Aplikasi</div>
         <div style='display:grid;grid-template-columns:1fr 1fr;gap:12px;'>
             <div style='background:#f0f7ff;border-radius:10px;padding:14px;'>
-                <b>🔍 Prediksi Penyakit</b><br>
+                <b>Prediksi Penyakit</b><br>
                 <span style='font-size:0.85rem;color:#64748b;'>Input gejala → prediksi top 3 penyakit beserta probabilitasnya</span>
             </div>
             <div style='background:#f0fdf4;border-radius:10px;padding:14px;'>
-                <b>🌡️ Tingkat Keparahan</b><br>
+                <b>Tingkat Keparahan</b><br>
                 <span style='font-size:0.85rem;color:#64748b;'>Analisis severity gejala: Ringan / Sedang / Berat</span>
             </div>
             <div style='background:#fdf4ff;border-radius:10px;padding:14px;'>
-                <b>👨‍⚕️ Rekomendasi Dokter</b><br>
+                <b> Rekomendasi Dokter</b><br>
                 <span style='font-size:0.85rem;color:#64748b;'>Saran spesialis dokter yang tepat sesuai penyakit</span>
             </div>
             <div style='background:#fffbeb;border-radius:10px;padding:14px;'>
-                <b>🛡️ Cara Pencegahan</b><br>
+                <b> Cara Pencegahan</b><br>
                 <span style='font-size:0.85rem;color:#64748b;'>Tips pencegahan spesifik per penyakit</span>
             </div>
             <div style='background:#fff1f2;border-radius:10px;padding:14px;'>
-                <b>📚 Ensiklopedi Penyakit</b><br>
+                <b> Ensiklopedi Penyakit</b><br>
                 <span style='font-size:0.85rem;color:#64748b;'>Database lengkap 41 penyakit dengan info detail</span>
             </div>
             <div style='background:#f0f4f8;border-radius:10px;padding:14px;'>
-                <b>📜 Riwayat Pemeriksaan</b><br>
+                <b> Riwayat Pemeriksaan</b><br>
                 <span style='font-size:0.85rem;color:#64748b;'>Histori semua hasil prediksi selama sesi berlangsung</span>
             </div>
         </div>
