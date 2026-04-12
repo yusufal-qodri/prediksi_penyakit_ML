@@ -640,7 +640,7 @@ elif "Tentang" in page:
     with col1:
         st.markdown("""
         <div class='card'>
-            <div class='section-title'>🤖 Tentang Model</div>
+            <div class='section-title'>Tentang Model</div>
             <div style='color:#475569;font-size:0.95rem;line-height:1.8;'>
                 Aplikasi ini menggunakan algoritma <strong>Random Forest</strong> yang dilatih 
                 menggunakan dataset publik berisi <strong>41 jenis penyakit</strong> dan 
